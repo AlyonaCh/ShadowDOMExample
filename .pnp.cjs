@@ -37,6 +37,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint", "npm:8.57.0"],\
             ["eslint-plugin-vue", "virtual:46a8387e3a94c3ab7ad18dbb53d58981bbcfcdfb6b7e1600d8801a647e37c33acfc4f3aaafbad61e04b1009993feb44b7ddba2f58e308f22940c49e574486097#npm:9.25.0"],\
             ["npm-run-all2", "npm:6.1.2"],\
+            ["photoswipe", "npm:5.4.3"],\
             ["typescript", "patch:typescript@npm%3A5.4.5#~builtin<compat/typescript>::version=5.4.5&hash=14eedb"],\
             ["vite", "virtual:46a8387e3a94c3ab7ad18dbb53d58981bbcfcdfb6b7e1600d8801a647e37c33acfc4f3aaafbad61e04b1009993feb44b7ddba2f58e308f22940c49e574486097#npm:5.2.10"],\
             ["vue", "virtual:46a8387e3a94c3ab7ad18dbb53d58981bbcfcdfb6b7e1600d8801a647e37c33acfc4f3aaafbad61e04b1009993feb44b7ddba2f58e308f22940c49e574486097#npm:3.4.25"],\
@@ -2757,6 +2758,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["photoswipe", [\
+        ["npm:5.4.3", {\
+          "packageLocation": "./.yarn/cache/photoswipe-npm-5.4.3-b248c09dad-92df48454b.zip/node_modules/photoswipe/",\
+          "packageDependencies": [\
+            ["photoswipe", "npm:5.4.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["picocolors", [\
         ["npm:1.0.0", {\
           "packageLocation": "./.yarn/cache/picocolors-npm-1.0.0-d81e0b1927-a2e8092dd8.zip/node_modules/picocolors/",\
@@ -2972,6 +2982,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint", "npm:8.57.0"],\
             ["eslint-plugin-vue", "virtual:46a8387e3a94c3ab7ad18dbb53d58981bbcfcdfb6b7e1600d8801a647e37c33acfc4f3aaafbad61e04b1009993feb44b7ddba2f58e308f22940c49e574486097#npm:9.25.0"],\
             ["npm-run-all2", "npm:6.1.2"],\
+            ["photoswipe", "npm:5.4.3"],\
             ["typescript", "patch:typescript@npm%3A5.4.5#~builtin<compat/typescript>::version=5.4.5&hash=14eedb"],\
             ["vite", "virtual:46a8387e3a94c3ab7ad18dbb53d58981bbcfcdfb6b7e1600d8801a647e37c33acfc4f3aaafbad61e04b1009993feb44b7ddba2f58e308f22940c49e574486097#npm:5.2.10"],\
             ["vue", "virtual:46a8387e3a94c3ab7ad18dbb53d58981bbcfcdfb6b7e1600d8801a647e37c33acfc4f3aaafbad61e04b1009993feb44b7ddba2f58e308f22940c49e574486097#npm:3.4.25"],\
