@@ -62,7 +62,7 @@ onUnmounted(() => {
   }
 });
 </script>
-<style scoped>
+<style>
 @import 'photoswipe/style.css';
 .gallery {
   width: 300px;
