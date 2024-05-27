@@ -17,37 +17,40 @@ import MicroApp from "@/components/MicroApp.vue";
 
 const shadowHost = ref<HTMLElement | null>(null);
 
-const createAndAppendStyleElement = (shadowRoot: ShadowRoot) => {
-  const styleElement = document.createElement('style');
-  shadowRoot.prepend(styleElement);
-  return styleElement;
+const fetchStyleContent = async (href: string): Promise<string> => {
+  const response = await fetch(href);
+  if (!response.ok) {
+    throw new Error(`Error fetching stylesheet ${href}: ${response.statusText}`);
+  }
+  return response.text();
 };
 
-const copyStylesToShadowRoot = (styleElement: HTMLStyleElement) => {
-  const globalStyles = document.querySelectorAll('style');
+const appendGlobalStyles = (styleElement: HTMLStyleElement): void => {
+  const globalStyles = document.querySelectorAll<HTMLStyleElement>('style');
   globalStyles.forEach(style => {
     if (style.innerHTML) {
-      styleElement.append(style.innerHTML);
+      styleElement.textContent += style.innerHTML;
     }
   });
-  const globalLinks = document.querySelectorAll('link[rel="stylesheet"]');
-  globalLinks.forEach(link => {
-    fetch(link.href)
-        .then(response => response.text())
-        .then(styleContent => {
-          const styleElement = document.createElement('style');
-          styleElement.textContent = styleContent;
-          styleElement.appendChild(styleElement);
-        })
-        .catch(error => {
-          console.error(`Error fetching stylesheet ${link.href}:`, error);
-        });
-  });
-  globalLinks.forEach(style => {
-    if (style.innerHTML) {
-      styleElement.append(style.innerHTML);
+};
+
+const appendLinkStyles = async (styleElement: HTMLStyleElement): Promise<void> => {
+  const globalLinks = document.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"]');
+  for (const link of globalLinks) {
+    try {
+      const styleContent = await fetchStyleContent(link.href);
+      styleElement.textContent += styleContent;
+    } catch (error) {
+      console.error(error.message);
     }
-  });
+  }
+};
+
+const copyStylesToShadowRoot = async (shadowRoot: ShadowRoot): Promise<void> => {
+  const styleElement = document.createElement('style');
+  await appendLinkStyles(styleElement);
+  appendGlobalStyles(styleElement);
+  shadowRoot.appendChild(styleElement);
 };
 
 const initializeShadowRoot = () => {
@@ -57,8 +60,7 @@ const initializeShadowRoot = () => {
   const appInstance = createApp(MicroApp);
   appInstance.mount(shadowRoot);
 
-  const styleElement = createAndAppendStyleElement(shadowRoot);
-  nextTick(() => copyStylesToShadowRoot(styleElement));
+  nextTick(() => copyStylesToShadowRoot(shadowRoot));
 };
 
 onMounted(() => {
