@@ -30,6 +30,24 @@ const copyStylesToShadowRoot = (styleElement: HTMLStyleElement) => {
       styleElement.append(style.innerHTML);
     }
   });
+  const globalLinks = document.querySelectorAll('link[rel="stylesheet"]');
+  globalLinks.forEach(link => {
+    fetch(link.href)
+        .then(response => response.text())
+        .then(styleContent => {
+          const styleElement = document.createElement('style');
+          styleElement.textContent = styleContent;
+          styleElement.appendChild(styleElement);
+        })
+        .catch(error => {
+          console.error(`Error fetching stylesheet ${link.href}:`, error);
+        });
+  });
+  globalLinks.forEach(style => {
+    if (style.innerHTML) {
+      styleElement.append(style.innerHTML);
+    }
+  });
 };
 
 const initializeShadowRoot = () => {
