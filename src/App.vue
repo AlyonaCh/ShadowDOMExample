@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, createApp } from 'vue';
+import { onMounted, ref, createApp, nextTick } from 'vue';
 import MicroApp from "@/components/MicroApp.vue";
 
 const shadowHost = ref<HTMLElement | null>(null);
@@ -40,7 +40,7 @@ const initializeShadowRoot = () => {
   appInstance.mount(shadowRoot);
 
   const styleElement = createAndAppendStyleElement(shadowRoot);
-  copyStylesToShadowRoot(styleElement);
+  nextTick(() => copyStylesToShadowRoot(styleElement));
 };
 
 onMounted(() => {
